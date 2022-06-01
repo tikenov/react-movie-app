@@ -4,11 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "format": "prettier --write .",
+    "configure-husky": "npx husky install && npx husky add .husky/pre-commit \"npx --no-install lint-staged\""
   },
-  "repository": {
-    "type": "git",
-    "url": ""
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,json}": [
+      "eslint . --fix ",
+      "prettier --ignore-path .eslintignore --write ."
+    ]
   },
   "author": "Azamat Tikenov",
   "license": "MIT",
@@ -17,11 +27,21 @@
     "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
     "babel-loader": "^8.2.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.16.0",
+    "eslint-plugin-react": "^7.30.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
+    "image-webpack-loader": "^8.1.0",
+    "lint-staged": "^13.0.0",
+    "node-sass": "^7.0.1",
+    "prettier": "^2.6.2",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.1"
